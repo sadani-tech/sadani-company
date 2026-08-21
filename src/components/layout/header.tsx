@@ -14,7 +14,8 @@ export function Header({ locale, dictionary }: { locale: Locale; dictionary: Dic
   const pathname = usePathname();
   const cleanPath = stripLocale(pathname);
   const labels = [dictionary.nav.home, dictionary.nav.products, dictionary.nav.about, dictionary.nav.careers, dictionary.nav.contact];
-  const switchPath = locale === "id" ? localizePath("en", cleanPath) : cleanPath;
+  const idPath = cleanPath;
+  const enPath = localizePath("en", cleanPath);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -32,7 +33,10 @@ export function Header({ locale, dictionary }: { locale: Locale; dictionary: Dic
           })}
         </nav>
         <div className="hidden items-center gap-2 md:flex">
-          <Link href={switchPath} className="language-switch" hrefLang={locale === "id" ? "en" : "id"} aria-label={`Switch to ${dictionary.nav.language}`}>{locale === "id" ? "EN" : "ID"}</Link>
+          <div className="language-switch" role="group" aria-label={locale === "id" ? "Pilih bahasa" : "Choose language"}>
+            <a href={idPath} hrefLang="id" lang="id" aria-current={locale === "id" ? "page" : undefined} className={locale === "id" ? "language-active" : ""}>ID</a>
+            <a href={enPath} hrefLang="en" lang="en" aria-current={locale === "en" ? "page" : undefined} className={locale === "en" ? "language-active" : ""}>EN</a>
+          </div>
           <Link href={localizePath(locale, "/products")} className="button button-primary hidden lg:inline-flex">{dictionary.nav.explore}</Link>
         </div>
         <button type="button" className="icon-button md:hidden" aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen((value) => !value)}>
@@ -42,7 +46,7 @@ export function Header({ locale, dictionary }: { locale: Locale; dictionary: Dic
       <div id="mobile-navigation" className={`mobile-menu md:hidden ${open ? "mobile-menu-open" : ""}`} aria-hidden={!open}>
         <nav aria-label="Mobile navigation" className="flex flex-col px-5 pb-6 pt-2">
           {navigation.map((item, index) => <Link key={item.href} href={localizePath(locale, item.href)} tabIndex={open ? 0 : -1} className="mobile-nav-link" onClick={() => setOpen(false)}>{labels[index]}</Link>)}
-          <Link href={switchPath} tabIndex={open ? 0 : -1} className="mobile-nav-link flex items-center justify-between" onClick={() => setOpen(false)}><span>{dictionary.nav.language}</span><b>{locale === "id" ? "EN" : "ID"}</b></Link>
+          <div className="mobile-language-row"><span>{locale === "id" ? "Bahasa" : "Language"}</span><div className="language-switch" role="group" aria-label={locale === "id" ? "Pilih bahasa" : "Choose language"}><a href={idPath} hrefLang="id" lang="id" tabIndex={open ? 0 : -1} aria-current={locale === "id" ? "page" : undefined} className={locale === "id" ? "language-active" : ""}>ID</a><a href={enPath} hrefLang="en" lang="en" tabIndex={open ? 0 : -1} aria-current={locale === "en" ? "page" : undefined} className={locale === "en" ? "language-active" : ""}>EN</a></div></div>
           <Link href={localizePath(locale, "/products")} tabIndex={open ? 0 : -1} className="button button-primary mt-4 justify-center" onClick={() => setOpen(false)}>{dictionary.nav.explore}</Link>
         </nav>
       </div>
