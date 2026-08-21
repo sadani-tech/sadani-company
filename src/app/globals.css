@@ -39,6 +39,7 @@ a, button, input, select, textarea { outline-offset: 3px; }
 .logo { display: inline-flex; align-items: center; gap: .65rem; font-size: .81rem; letter-spacing: .2em; font-weight: 800; }
 .nav-link { border-radius: 999px; padding: .65rem .85rem; color: #526159; font-size: .8rem; font-weight: 650; transition: color .2s, background .2s; }
 .nav-link:hover, .nav-link-active { background: rgba(13,23,18,.055); color: #0d1712; }
+.language-switch { display: inline-flex; align-items: center; gap: 2px; border: 1px solid var(--border); border-radius: 999px; background: rgba(255,255,255,.45); padding: 3px; color: #647069; font-size: .62rem; font-weight: 800; }.language-switch a { display: grid; min-width: 31px; height: 31px; place-items: center; border-radius: 999px; transition: background .2s, color .2s, box-shadow .2s; }.language-switch a:hover { color: #0d1712; }.language-switch .language-active { background: #0d1712; color: white; box-shadow: 0 2px 8px rgba(13,23,18,.12); }.language-switch .language-active:hover { color: white; }.mobile-language-row { display: flex; min-height: 60px; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); padding-inline: .25rem; font-size: 1rem; font-weight: 650; }
 .icon-button { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 50%; border: 1px solid var(--border); }
 .mobile-menu { max-height: 0; overflow: hidden; opacity: 0; transition: max-height .35s ease, opacity .25s; }
 .mobile-menu-open { max-height: 500px; opacity: 1; }

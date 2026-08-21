@@ -12,9 +12,10 @@ export async function POST(request: Request) {
   attempts.set(ip, !entry || entry.resetAt <= now ? { count: 1, resetAt: now + 60_000 } : { ...entry, count: entry.count + 1 });
   let body: unknown; try { body = await request.json(); } catch { return NextResponse.json({ message: "We couldn’t read that message." }, { status: 400 }); }
   const parsed = contactSchema.safeParse(body);
-  if (!parsed.success) return NextResponse.json({ message: "Please check the highlighted fields.", errors: parsed.error.flatten().fieldErrors }, { status: 400 });
-  if (parsed.data.website) return NextResponse.json({ message: "Thanks. Your message has been received." });
+  const locale = typeof body === "object" && body !== null && "locale" in body && body.locale === "en" ? "en" : "id";
+  if (!parsed.success) return NextResponse.json({ message: locale === "id" ? "Periksa kembali kolom yang ditandai." : "Please check the highlighted fields.", errors: parsed.error.flatten().fieldErrors }, { status: 400 });
+  if (parsed.data.website) return NextResponse.json({ message: locale === "id" ? "Terima kasih. Pesan Anda telah diterima." : "Thanks. Your message has been received." });
   const result = await getContactService().send(parsed.data);
-  if (!result.delivered) return NextResponse.json({ message: `${result.reason} Please contact Sadani once an official email channel is published.` }, { status: 503 });
-  return NextResponse.json({ message: "Thanks. Your message has been sent to Sadani." });
+  if (!result.delivered) return NextResponse.json({ message: locale === "id" ? "Pengiriman kontak belum dikonfigurasi. Silakan hubungi Sadani setelah kanal email resmi dipublikasikan." : `${result.reason} Please contact Sadani once an official email channel is published.` }, { status: 503 });
+  return NextResponse.json({ message: locale === "id" ? "Terima kasih. Pesan Anda telah dikirim ke Sadani." : "Thanks. Your message has been sent to Sadani." });
 }

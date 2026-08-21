@@ -9,6 +9,7 @@ export const contactSchema = z.object({
   inquiryType: z.enum(inquiryTypes),
   message: z.string().trim().min(20, "Please share at least 20 characters.").max(3000),
   website: z.string().max(0, "Spam detected.").optional().default(""),
+  locale: z.enum(["id", "en"]).optional().default("id"),
 });
 export type ContactMessage = z.infer<typeof contactSchema>;
 
