@@ -343,3 +343,28 @@ npm run typecheck
 npm run build
 npm run start
 ```
+
+## Implementasi Bahasa Indonesia dan English
+
+Website mendukung dua bahasa dengan Bahasa Indonesia sebagai default:
+
+- `/` dan route tanpa prefix menampilkan Bahasa Indonesia.
+- `/en` dan route dengan prefix `/en` menampilkan English.
+- `/id` diarahkan secara permanen ke route default tanpa prefix untuk menghindari duplikasi SEO.
+- Language switcher tersedia pada desktop dan mobile navigation.
+- Pilihan bahasa mempertahankan halaman yang sedang dibuka.
+- Homepage, products, product details, About, Careers, Contact, Privacy, Terms, navigation, footer, 404, contact form, dan conceptual product preview telah dilokalkan.
+- Contact API memberikan status response sesuai bahasa formulir.
+- Canonical URL dan `hreflang` tersedia untuk versi `id` dan `en`.
+- Sitemap menyertakan kedua versi bahasa beserta language alternates.
+
+Arsitektur locale:
+
+```text
+src/i18n/
+  config.ts          Shared locale and path helpers
+  dictionaries.ts    Indonesian and English content
+  server.ts          Server-only locale resolver
+
+src/proxy.ts         Locale routing and English URL rewrite
+```
