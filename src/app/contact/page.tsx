@@ -1,0 +1,10 @@
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import { BriefcaseBusiness, Handshake, MapPin, MessageCircle, Phone, Shapes } from "lucide-react";
+import { ContactForm } from "@/components/contact/contact-form";
+import { Container } from "@/components/ui/container";
+import { siteConfig } from "@/config/site";
+
+export const metadata: Metadata = { title: "Contact", description: "Contact Sadani about general inquiries, partnerships, product collaboration, or future careers.", alternates: { canonical: "/contact" } };
+const inquiry = [{ icon: MessageCircle, title: "General inquiries" }, { icon: Handshake, title: "Partnership" }, { icon: Shapes, title: "Product collaboration" }, { icon: BriefcaseBusiness, title: "Careers" }];
+export default function ContactPage() { return <><section className="page-hero"><Container><p className="eyebrow text-green">Contact Sadani</p><h1>Let’s talk about what could <em>become real.</em></h1><p>Have a question, a product idea, or a reason to build together? Give us the useful context and we’ll take it from there.</p></Container></section><section className="pb-24 sm:pb-32"><Container><div className="grid gap-10 lg:grid-cols-[.7fr_1.3fr] lg:gap-16"><div><h2 className="text-xl font-semibold text-ink">What can we discuss?</h2><div className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-1">{inquiry.map(({ icon: Icon, title }) => <div className="inquiry-type" key={title}><Icon size={19} /><span>{title}</span></div>)}</div><div className="company-contact"><div><MapPin size={18} /><address><strong>Business location</strong><span>{siteConfig.address.city}, {siteConfig.address.province}, {siteConfig.address.country}</span></address></div><div><Phone size={18} /><p><strong>Business phone</strong><a href={`tel:${siteConfig.phone.href}`}>{siteConfig.phone.display}</a></p></div></div><p className="mt-6 text-xs leading-5 text-muted">Official business email will be added after the company domain and mail service are configured.</p></div><Suspense fallback={<div className="contact-form min-h-[500px] animate-pulse" />}><ContactForm /></Suspense></div></Container></section></>; }
