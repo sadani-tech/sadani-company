@@ -25,12 +25,21 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     name: siteConfig.legalName,
     url: siteConfig.url,
     description: siteConfig.longDescription,
+    email: siteConfig.email,
     telephone: siteConfig.phone.href,
     address: {
       "@type": "PostalAddress",
       addressLocality: siteConfig.address.city,
       addressRegion: siteConfig.address.province,
       addressCountry: "ID",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      email: siteConfig.email,
+      telephone: siteConfig.phone.href,
+      areaServed: "ID",
+      availableLanguage: ["id", "en"],
     },
   };
   const locale = await getLocale();

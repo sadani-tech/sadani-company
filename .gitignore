@@ -1,9 +1,7 @@
 node_modules/
 .next/
 out/
-.open-next/
-.wrangler/
-cloudflare-env.d.ts
+.vercel/
 .env*
 !.env.example
 *.tsbuildinfo

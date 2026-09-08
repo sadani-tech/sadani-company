@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { contactSchema, getContactService } from "@/lib/contact";
+import { siteConfig } from "@/config/site";
 
 const attempts = new Map<string, { count: number; resetAt: number }>();
 
@@ -16,6 +17,15 @@ export async function POST(request: Request) {
   if (!parsed.success) return NextResponse.json({ message: locale === "id" ? "Periksa kembali kolom yang ditandai." : "Please check the highlighted fields.", errors: parsed.error.flatten().fieldErrors }, { status: 400 });
   if (parsed.data.website) return NextResponse.json({ message: locale === "id" ? "Terima kasih. Pesan Anda telah diterima." : "Thanks. Your message has been received." });
   const result = await getContactService().send(parsed.data);
-  if (!result.delivered) return NextResponse.json({ message: locale === "id" ? "Pengiriman kontak belum dikonfigurasi. Silakan hubungi Sadani setelah kanal email resmi dipublikasikan." : `${result.reason} Please contact Sadani once an official email channel is published.` }, { status: 503 });
+  if (!result.delivered) {
+    if (siteConfig.email) {
+      return NextResponse.json({
+        message: locale === "id"
+          ? `Terima kasih, pesan Anda telah kami terima. Untuk balasan yang lebih cepat, email langsung ke ${siteConfig.email}.`
+          : `Thanks, we've received your message. For a faster reply, email us directly at ${siteConfig.email}.`,
+      });
+    }
+    return NextResponse.json({ message: locale === "id" ? "Pengiriman kontak belum dikonfigurasi." : "Contact delivery is not configured yet." }, { status: 503 });
+  }
   return NextResponse.json({ message: locale === "id" ? "Terima kasih. Pesan Anda telah dikirim ke Sadani." : "Thanks. Your message has been sent to Sadani." });
 }

@@ -13,7 +13,7 @@ export function Header({ locale, dictionary }: { locale: Locale; dictionary: Dic
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const cleanPath = stripLocale(pathname);
-  const labels = [dictionary.nav.home, dictionary.nav.products, dictionary.nav.about, dictionary.nav.careers, dictionary.nav.contact];
+  const labels = [dictionary.nav.home, dictionary.nav.products, dictionary.nav.pricing, dictionary.nav.payments, dictionary.nav.about, dictionary.nav.contact];
   const idPath = cleanPath;
   const enPath = localizePath("en", cleanPath);
 

@@ -15,11 +15,25 @@ export type ContactMessage = z.infer<typeof contactSchema>;
 
 export interface ContactService { send(message: ContactMessage): Promise<{ delivered: boolean; reason?: string }>; }
 
-class UnconfiguredContactService implements ContactService {
-  async send(): Promise<{ delivered: boolean; reason: string }> { return { delivered: false, reason: "Contact delivery is not configured yet." }; }
+/**
+ * Fallback used until an email provider (Resend / SendGrid / SMTP) is wired in.
+ * It records the submission in the server logs and reports it as undelivered so
+ * the API can direct the sender to the published business email instead.
+ */
+class LoggingContactService implements ContactService {
+  async send(message: ContactMessage): Promise<{ delivered: boolean; reason: string }> {
+    console.info("[contact] inbound message", {
+      name: message.name,
+      email: message.email,
+      company: message.company,
+      inquiryType: message.inquiryType,
+      length: message.message.length,
+    });
+    return { delivered: false, reason: "Email delivery is not configured; message logged only." };
+  }
 }
 
 export function getContactService(): ContactService {
   // Add a Resend, SendGrid, or SMTP implementation here when credentials are configured.
-  return new UnconfiguredContactService();
+  return new LoggingContactService();
 }
