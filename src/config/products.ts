@@ -29,38 +29,38 @@ export const products: readonly Product[] = [
     website: "https://serahin.suraise.com",
     category: "Commerce",
     shortDescription:
-      "A pre-order platform where sellers open ordering campaigns and customers reserve and pay for items online before they are produced.",
+      "A pre-order platform that brings public catalogs, multi-variant checkout, payments, and order progress into one flow.",
     tagline: "Pre-orders, made easier to manage.",
     introduction:
-      "Serahin gives sellers a structured way to run pre-order campaigns and gives customers a clear place to review an item, choose a quantity, check the price, pay online, and follow their order until it ships.",
+      "Serahin gives sellers a structured way to publish and duplicate pre-order campaigns, manage products and vendors, and track orders. Customers can browse the public catalog, order multiple variants, choose an available payment route, and follow fulfilment from one portal.",
     problem:
       "Pre-orders often get scattered across chats, forms, and manual records, so quantities, deadlines, payment status, and order progress are hard to follow for both sides.",
     philosophy:
       "Give sellers an organized workflow and give customers a clear view of what they ordered, what they paid, and what happens next.",
     status:
-      "Serahin is an operating product. Online payments are processed by a licensed third-party payment gateway; funds are settled to the seller running the campaign. Sadani operates the platform and does not store card or bank credentials.",
+      "Serahin's public storefront, campaign operations, order tracking, and payment-service integration are implemented. Manual payment remains available; automatic gateway checkout is shown only when it is enabled for the relevant environment and campaign.",
     features: [
-      { title: "Pre-order campaigns", description: "Open an ordering window with a deadline, quota, item list, and price." },
-      { title: "Online checkout", description: "Customers reserve a quantity and pay online through a secure payment gateway (bank transfer, virtual account, e-wallet, QRIS)." },
-      { title: "Order & payment tracking", description: "Quantities, payment status, and production progress stay in one flow for the seller and the buyer." },
+      { title: "Public storefront", description: "Browse active campaigns across the catalog, then check out within the selected campaign." },
+      { title: "Campaign operations", description: "Manage multi-variant products, vendors, quotas, deadlines, imports, exports, and reusable campaign copies." },
+      { title: "Orders & payments", description: "Track manual or gateway payments and keep buyers informed through a self-service order portal." },
     ],
     id: {
       category: "Perdagangan",
       shortDescription:
-        "Platform pre-order tempat penjual membuka kampanye pemesanan dan pelanggan memesan serta membayar barang secara online sebelum diproduksi.",
+        "Platform pre-order yang menyatukan katalog publik, checkout multi-varian, pembayaran, dan progres pesanan dalam satu alur.",
       tagline: "Pre-order, lebih mudah dikelola.",
       introduction:
-        "Serahin memberi penjual cara yang terstruktur untuk menjalankan kampanye pre-order, dan memberi pelanggan tempat yang jelas untuk meninjau barang, memilih jumlah, mengecek harga, membayar online, dan mengikuti pesanan sampai dikirim.",
+        "Serahin memberi penjual cara terstruktur untuk menerbitkan dan menduplikasi kampanye pre-order, mengelola produk dan vendor, serta melacak pesanan. Pelanggan dapat menjelajahi katalog publik, memesan beberapa varian, memilih jalur pembayaran yang tersedia, dan mengikuti pemenuhan pesanan dari satu portal.",
       problem:
         "Pre-order sering tersebar di chat, formulir, dan catatan manual, sehingga jumlah, tenggat, status pembayaran, dan progres pesanan sulit diikuti kedua pihak.",
       philosophy:
         "Memberi penjual alur kerja yang teratur dan memberi pelanggan gambaran jelas tentang pesanan, pembayaran, serta langkah berikutnya.",
       status:
-        "Serahin adalah produk yang beroperasi. Pembayaran online diproses oleh payment gateway pihak ketiga berizin; dana diselesaikan ke penjual yang menjalankan kampanye. Sadani mengoperasikan platform dan tidak menyimpan data kartu atau kredensial bank.",
+        "Storefront publik, operasional kampanye, pelacakan pesanan, dan integrasi payment-service Serahin sudah diimplementasikan. Pembayaran manual tetap tersedia; checkout gateway otomatis hanya ditampilkan ketika aktif untuk environment dan kampanye terkait.",
       features: [
-        { title: "Kampanye pre-order", description: "Buka periode pemesanan dengan tenggat, kuota, daftar item, dan harga." },
-        { title: "Checkout online", description: "Pelanggan memesan jumlah dan membayar online melalui payment gateway aman (transfer bank, virtual account, e-wallet, QRIS)." },
-        { title: "Pelacakan pesanan & pembayaran", description: "Jumlah, status pembayaran, dan progres produksi berada dalam satu alur untuk penjual dan pembeli." },
+        { title: "Storefront publik", description: "Jelajahi kampanye aktif dari katalog, lalu checkout di dalam kampanye yang dipilih." },
+        { title: "Operasional kampanye", description: "Kelola produk multi-varian, vendor, kuota, tenggat, impor, ekspor, dan salinan kampanye yang dapat digunakan ulang." },
+        { title: "Pesanan & pembayaran", description: "Lacak pembayaran manual atau gateway dan informasikan progres melalui portal pesanan mandiri pembeli." },
       ],
     },
   },
@@ -68,22 +68,23 @@ export const products: readonly Product[] = [
     slug: "manifly",
     name: "Manifly",
     featured: true,
+    website: "https://app.manifly.id",
     category: "Personal Finance",
     shortDescription:
       "A personal finance tracker that records transactions straight from a WhatsApp chat, a voice note, or a photo of a receipt.",
     tagline: "See where your money is moving.",
     introduction:
-      "Manifly is personal finance software designed to make everyday records effortless: type “kopi 15rb” in WhatsApp, send a voice note, or snap a receipt, and it lands in the same dashboard, budgets, and analytics.",
+      "Manifly is personal finance software designed to make everyday records easier: type “coffee 15k” in WhatsApp, send a voice note, scan a receipt, or use the web app, and review the result through the same accounts, budgets, analytics, and shared pockets.",
     problem:
       "When income and expenses live in scattered notes or go unrecorded, it becomes difficult to see a reliable picture of everyday cash flow.",
     philosophy:
       "Financial records should feel approachable. Clear information helps people make more considered decisions without adding complexity.",
     status:
-      "Manifly is personal finance software. It is not a bank, e-wallet, payment gateway, lender, or regulated financial institution, and it never asks for internet-banking PINs, passwords, or OTPs.",
+      "Manifly v1.8 has implemented its public product site, WhatsApp membership limits, and subscription billing flow. Paid checkout availability is shown inside Manifly and may remain disabled until payment-provider release checks are complete. Manifly is not a bank, e-wallet, lender, or payment gateway.",
     features: [
-      { title: "Record from WhatsApp", description: "Natural-language chat and voice notes become categorized transactions." },
-      { title: "Clear dashboards", description: "Balances, income vs. expense, category breakdowns, and trends in one place." },
-      { title: "Budgets & health", description: "Per-category budgets and a transparent financial-health score." },
+      { title: "Web & WhatsApp capture", description: "Record from the web, natural-language chat, voice notes, or receipt scans." },
+      { title: "A complete money view", description: "Review accounts, transactions, budgets, recurring items, analytics, and financial health." },
+      { title: "Pockets & memberships", description: "Collaborate through shared pockets and choose a plan for the WhatsApp capacity you need." },
     ],
     id: {
       category: "Keuangan Pribadi",
@@ -91,17 +92,17 @@ export const products: readonly Product[] = [
         "Pelacak keuangan pribadi yang mencatat transaksi langsung dari chat WhatsApp, voice note, atau foto struk.",
       tagline: "Lihat ke mana uang Anda bergerak.",
       introduction:
-        "Manifly adalah software keuangan pribadi yang dirancang agar pencatatan sehari-hari terasa mudah: ketik “kopi 15rb” di WhatsApp, kirim voice note, atau foto struk, dan semuanya masuk ke dashboard, anggaran, dan analitik yang sama.",
+        "Manifly adalah software keuangan pribadi yang membuat pencatatan sehari-hari lebih mudah: ketik “kopi 15rb” di WhatsApp, kirim voice note, pindai struk, atau gunakan aplikasi web, lalu tinjau hasilnya melalui akun, anggaran, analitik, dan pocket bersama yang sama.",
       problem:
         "Ketika pemasukan dan pengeluaran tersebar atau tidak tercatat, gambaran arus kas sehari-hari menjadi sulit dipercaya.",
       philosophy:
         "Catatan keuangan seharusnya terasa mudah didekati. Informasi yang jelas membantu orang membuat keputusan lebih matang tanpa menambah kerumitan.",
       status:
-        "Manifly adalah software keuangan pribadi. Bukan bank, e-wallet, payment gateway, pemberi pinjaman, atau lembaga keuangan berizin, dan tidak pernah meminta PIN, password, atau OTP internet banking.",
+        "Manifly v1.8 sudah mengimplementasikan website produk publik, batas membership WhatsApp, dan alur billing langganan. Ketersediaan checkout berbayar ditampilkan di Manifly dan dapat tetap dinonaktifkan sampai pemeriksaan rilis penyedia pembayaran selesai. Manifly bukan bank, e-wallet, pemberi pinjaman, atau payment gateway.",
       features: [
-        { title: "Catat lewat WhatsApp", description: "Chat bahasa natural dan voice note menjadi transaksi yang terkategori." },
-        { title: "Dashboard yang jelas", description: "Saldo, pemasukan vs pengeluaran, komposisi kategori, dan tren dalam satu tempat." },
-        { title: "Anggaran & kesehatan", description: "Anggaran per kategori dan skor kesehatan finansial yang transparan." },
+        { title: "Pencatatan web & WhatsApp", description: "Catat lewat web, chat bahasa natural, voice note, atau pindai struk." },
+        { title: "Gambaran uang menyeluruh", description: "Tinjau akun, transaksi, anggaran, transaksi berulang, analitik, dan kesehatan finansial." },
+        { title: "Pocket & membership", description: "Berkolaborasi melalui pocket bersama dan pilih paket sesuai kapasitas WhatsApp yang dibutuhkan." },
       ],
     },
   },

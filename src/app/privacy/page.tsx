@@ -32,7 +32,7 @@ export default async function PrivacyPage() {
           : "An overview of how this website and Sadani's payment services handle information."
       }
       draft={false}
-      updated={id ? "Terakhir diperbarui: Februari 2026" : "Last updated: February 2026"}
+      updated={id ? "Terakhir diperbarui: 11 September 2026" : "Last updated: September 11, 2026"}
     >
       <h2>{id ? "Informasi yang Anda berikan" : "Information you choose to provide"}</h2>
       <p>
@@ -44,8 +44,8 @@ export default async function PrivacyPage() {
       <h2>{id ? "Informasi pembayaran" : "Payment information"}</h2>
       <p>
         {id
-          ? "Pembayaran online untuk pesanan di Serahin diproses oleh penyedia payment gateway pihak ketiga yang berizin. Rincian pembayaran sensitif seperti nomor kartu penuh, PIN, dan OTP dimasukkan pada halaman penyedia pembayaran dan tidak disimpan oleh Sadani. Sadani menyimpan data terbatas yang diperlukan untuk mengelola pesanan, seperti status pembayaran, jumlah, mata uang (IDR), waktu transaksi, dan referensi pesanan."
-          : "Online payments for orders on Serahin are processed by a licensed third-party payment-gateway provider. Sensitive payment details such as full card numbers, PINs, and OTPs are entered on the payment provider's pages and are not stored by Sadani. Sadani retains the limited data needed to manage an order, such as payment status, amount, currency (IDR), transaction time, and order reference."}
+          ? "Pembayaran otomatis untuk pesanan Serahin dan membership Manifly diproses melalui payment-service Sadani dan halaman hosted penyedia pembayaran pihak ketiga. Rincian sensitif seperti nomor kartu penuh, PIN, password internet banking, dan OTP tidak disimpan oleh aplikasi produk Sadani. Kami menyimpan data terbatas yang diperlukan untuk pesanan, billing, dukungan, audit, dan rekonsiliasi, seperti status, jumlah, mata uang, waktu, referensi produk, serta referensi provider yang tidak sensitif."
+          : "Automatic payments for Serahin orders and Manifly memberships are processed through Sadani's payment service and a third-party provider's hosted page. Sensitive details such as full card numbers, PINs, internet-banking passwords, and OTPs are not stored by Sadani product applications. We retain limited data needed for orders, billing, support, audit, and reconciliation, such as status, amount, currency, time, product reference, and non-sensitive provider references."}
       </p>
 
       <h2>{id ? "Informasi teknis" : "Technical information"}</h2>
@@ -58,8 +58,8 @@ export default async function PrivacyPage() {
       <h2>{id ? "Cara informasi digunakan" : "How information is used"}</h2>
       <p>
         {id
-          ? "Informasi digunakan untuk merespons pertanyaan, memproses dan mendukung pesanan serta pembayaran, mengevaluasi potensi kolaborasi, memenuhi kewajiban hukum, dan menjaga keamanan layanan. Informasi tidak dijual."
-          : "Information is used to respond to inquiries, process and support orders and payments, evaluate potential collaboration, meet legal obligations, and keep the services secure. Information is not sold."}
+          ? "Informasi digunakan untuk merespons pertanyaan, memproses dan mendukung pesanan Serahin, billing dan entitlement Manifly, mengevaluasi potensi kolaborasi, memenuhi kewajiban hukum, mencegah penyalahgunaan, serta menjaga keamanan layanan. Informasi tidak dijual."
+          : "Information is used to respond to inquiries, process and support Serahin orders, manage Manifly billing and entitlements, evaluate potential collaboration, meet legal obligations, prevent misuse, and keep services secure. Information is not sold."}
       </p>
 
       <h2>{id ? "Berbagi dengan pihak ketiga" : "Sharing with third parties"}</h2>
@@ -72,8 +72,8 @@ export default async function PrivacyPage() {
       <h2>{id ? "Penyimpanan dan hak Anda" : "Retention and your rights"}</h2>
       <p>
         {id
-          ? "Data pesanan dan pembayaran disimpan selama diperlukan untuk operasi, dukungan, dan kepatuhan. Anda dapat meminta akses, koreksi, atau penghapusan data pribadi Anda dengan menghubungi kami; permintaan penghapusan tunduk pada kewajiban penyimpanan yang berlaku."
-          : "Order and payment data is retained for as long as needed for operations, support, and compliance. You can request access, correction, or deletion of your personal data by contacting us; deletion requests are subject to applicable retention obligations."}
+          ? "Data pesanan, membership, dan pembayaran disimpan selama diperlukan untuk operasi, dukungan, audit, pencegahan fraud, dan kepatuhan. Anda dapat meminta akses, koreksi, atau penghapusan data pribadi dengan menghubungi kami; permintaan penghapusan tunduk pada kewajiban penyimpanan yang berlaku dan tidak selalu menghapus catatan transaksi yang wajib dipertahankan."
+          : "Order, membership, and payment data is retained as needed for operations, support, audit, fraud prevention, and compliance. You can request access, correction, or deletion of personal data by contacting us; deletion is subject to applicable retention duties and may not remove transaction records that must be preserved."}
       </p>
 
       <h2>{id ? "Kontak" : "Contact"}</h2>

@@ -1,6 +1,6 @@
 # Sadani Company Profile — Implementation Summary
 
-Tanggal dokumentasi: 21 Agustus 2026
+Tanggal dokumentasi: 11 September 2026
 
 ## Ringkasan
 
@@ -10,7 +10,7 @@ Website memosisikan Sadani sebagai perusahaan teknologi Indonesia yang membangun
 
 ## Technology Stack
 
-- Next.js 16.3.1 dengan App Router
+- Next.js 15.5.23 dengan App Router
 - React 19.2.8
 - TypeScript strict mode
 - Tailwind CSS 4.3.3
@@ -33,15 +33,19 @@ Tidak digunakan UI framework besar atau animation library tambahan. Interaksi da
 ### Halaman produk
 
 - `/products/serahin`
-- `/products/money-flow`
+- `/products/manifly`
 - `/products/tuju`
+- `/products/insuralab`
 
-Ketiga halaman produk menggunakan satu reusable product-page architecture. Konten dan metadata masing-masing produk berasal dari konfigurasi terpusat.
+Keempat halaman produk menggunakan satu reusable product-page architecture. Konten dan metadata masing-masing produk berasal dari konfigurasi terpusat.
 
 ### Halaman legal dan sistem
 
 - `/privacy` — draft Privacy Policy untuk legal review
 - `/terms` — draft Terms of Use untuk legal review
+- `/pricing` — katalog harga dan status komersial produk
+- `/payments` — alur pembayaran Serahin dan Manifly
+- `/refunds` — panduan refund/pembatalan per produk
 - Custom 404 dengan pesan Sadani
 - Global loading state
 - Dynamic Open Graph image
@@ -56,7 +60,7 @@ Homepage berisi:
 - Sticky navigation dan responsive mobile menu
 - Hero: “Technology for ideas that deserve to exist.”
 - Visual product ecosystem dengan Sadani sebagai pusat
-- Daftar produk Serahin, Money Flow, dan Tuju
+- Daftar produk Serahin, Manifly, Tuju, dan InsuraLab
 - Kartu “What’s next?” tanpa membuat produk fiktif
 - Penjelasan alasan dan prinsip Sadani membangun produk
 - Bagian “Built in the age of AI”
@@ -65,7 +69,7 @@ Homepage berisi:
 - Final call-to-action
 - Footer lengkap dengan company, product, dan legal navigation
 
-Visual dibuat menggunakan HTML, CSS, dan SVG tanpa stock photography. Product preview diberi label sebagai conceptual preview agar tidak dianggap sebagai representasi fitur yang sudah dirilis.
+Visual dibuat menggunakan HTML, CSS, dan SVG tanpa stock photography. Serahin dan Manifly diberi label sebagai ilustrasi produk; Tuju dan InsuraLab tetap diberi label sebagai pratinjau konsep.
 
 ## Product Content
 
@@ -90,7 +94,16 @@ Setiap produk memiliki:
 
 Bahasa produk menggunakan frasa seperti “designed to”, “built to”, dan “aims to” untuk menghindari klaim bisnis atau kemampuan yang belum terverifikasi.
 
-Money Flow dijelaskan secara eksplisit sebagai financial management software, bukan bank, wallet, payment gateway, lender, atau regulated financial institution.
+Manifly dijelaskan secara eksplisit sebagai software keuangan pribadi, bukan bank, e-wallet, payment gateway, pemberi pinjaman, atau lembaga keuangan berizin.
+
+## Kondisi Produk dan Pembayaran Terkini
+
+- Serahin menampilkan storefront publik, katalog lintas kampanye, checkout multi-varian, pengelolaan vendor, pelacakan pesanan/pembayaran, ekspor/impor, dan duplikasi kampanye. Pembayaran manual tetap tersedia; checkout otomatis hanya tampil ketika integrasi payment-service aktif untuk environment dan kampanye terkait.
+- Harga publik Serahin untuk penjual belum ditetapkan, sehingga website perusahaan tidak menampilkan paket atau platform fee fiktif.
+- Manifly v1.8 telah mengimplementasikan public product site, membership WhatsApp, dan billing langganan. Katalog publik: Free Rp0, Lite Rp9.900, Plus Rp29.000, dan Pro Rp49.000 per bulan; add-on nomor WhatsApp Rp10.000 per unit per bulan hingga batas platform tiga nomor.
+- Manifly memakai checkout langganan Xendit melalui API provider-agnostic `payment-service`; Manifly tidak terhubung langsung ke SDK/API Xendit. Checkout produksi tetap mengikuti feature flag dan release gate provider.
+- Halaman pembayaran perusahaan membedakan pembayaran pesanan Serahin dari membership Manifly, menjelaskan aktivasi berdasarkan status otoritatif, dan tidak mengasumsikan metode pembayaran yang sama untuk setiap produk.
+- Halaman Terms, Privacy, Refund, Pricing, Contact, dan detail produk telah diselaraskan dengan dua alur pembayaran tersebut.
 
 ## Design System
 
@@ -233,7 +246,7 @@ public/
   og/
   products/
     serahin/
-    money-flow/
+    manifly/
     tuju/
 ```
 
@@ -276,7 +289,7 @@ npm run build
 
 Hasil production build:
 
-- Build berhasil menggunakan Next.js 16.3.1 dan Turbopack
+- Build berhasil menggunakan Next.js 15.5.23
 - 17 halaman dan endpoint berhasil diproses
 - Halaman publik diprerender secara static atau SSG
 - Hanya contact API yang bersifat dynamic

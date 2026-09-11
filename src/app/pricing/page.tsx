@@ -14,8 +14,8 @@ export async function generateMetadata(): Promise<Metadata> {
     title: locale === "id" ? "Harga" : "Pricing",
     description:
       locale === "id"
-        ? "Cara setiap produk Sadani dikenakan biaya, dan bagaimana pelanggan membayar. Semua harga dalam Rupiah."
-        : "How each Sadani product is charged, and how customers pay. All prices in Indonesian Rupiah.",
+        ? "Harga membership Manifly dan status harga komersial Serahin. Semua harga publik dalam Rupiah."
+        : "Manifly membership pricing and the status of Serahin commercial pricing. All public prices are in Indonesian Rupiah.",
     alternates: { canonical: localizePath(locale, "/pricing"), languages: { id: "/pricing", en: "/en/pricing" } },
   };
 }
@@ -66,15 +66,17 @@ export default async function PricingPage() {
                   </div>
                 ))}
               </div>
-              {group.slug === "serahin" && (
-                <div className="pricing-note">
-                  <strong>{t.perOrderTitle}. </strong>
-                  {t.perOrderCopy}{" "}
-                  <a className="font-semibold text-green" href={localizePath(locale, "/payments")}>
-                    {t.seePayments} →
-                  </a>
-                </div>
-              )}
+              <div className="pricing-note">
+                <strong>{t.perOrderTitle}. </strong>
+                {group.slug === "serahin"
+                  ? t.perOrderCopy
+                  : id
+                    ? "Paket berbayar menggunakan langganan bulanan dan hanya aktif setelah pembayaran terverifikasi."
+                    : "Paid plans use monthly subscriptions and activate only after verified payment."}{" "}
+                <a className="font-semibold text-green" href={localizePath(locale, "/payments")}>
+                  {t.seePayments} →
+                </a>
+              </div>
             </div>
           ))}
           <p className="pricing-disclaimer">{t.disclaimer}</p>

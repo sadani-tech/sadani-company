@@ -16,12 +16,20 @@ export const siteConfig = {
     province: "Jawa Tengah",
     country: "Indonesia",
   },
-  // The product that accepts online customer payments today. Used by the
-  // "How payments work" and refund pages.
-  paymentsProduct: {
-    name: "Serahin",
-    slug: "serahin",
-    url: "https://serahin.suraise.com",
-    currency: "IDR",
-  },
+  paymentProducts: [
+    {
+      name: "Serahin",
+      slug: "serahin",
+      url: "https://serahin.suraise.com",
+      billing: "one-time order payments",
+      currency: "IDR",
+    },
+    {
+      name: "Manifly",
+      slug: "manifly",
+      url: "https://app.manifly.id",
+      billing: "monthly memberships",
+      currency: "IDR",
+    },
+  ],
 } as const;

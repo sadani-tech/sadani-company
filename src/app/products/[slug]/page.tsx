@@ -12,10 +12,125 @@ import { getLocale } from "@/i18n/server";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() { return products.map(({ slug }) => ({ slug })); }
-export async function generateMetadata({ params }: Props): Promise<Metadata> { const { slug } = await params; const product = getProduct(slug); if (!product) return {}; const locale = await getLocale(); const content = localizeProduct(product, locale); return { title: product.name, description: content.shortDescription, alternates: { canonical: localizePath(locale, `/products/${product.slug}`), languages: { id: `/products/${product.slug}`, en: `/en/products/${product.slug}` } }, openGraph: { title: `${product.name} — Sadani`, description: content.shortDescription, url: localizePath(locale, `/products/${product.slug}`) } }; }
+export function generateStaticParams() {
+  return products.map(({ slug }) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const product = getProduct(slug);
+  if (!product) return {};
+  const locale = await getLocale();
+  const content = localizeProduct(product, locale);
+  return {
+    title: product.name,
+    description: content.shortDescription,
+    alternates: {
+      canonical: localizePath(locale, `/products/${product.slug}`),
+      languages: { id: `/products/${product.slug}`, en: `/en/products/${product.slug}` },
+    },
+    openGraph: {
+      title: `${product.name} — Sadani`,
+      description: content.shortDescription,
+      url: localizePath(locale, `/products/${product.slug}`),
+    },
+  };
+}
 
 export default async function ProductPage({ params }: Props) {
-  const { slug } = await params; const product = getProduct(slug); if (!product) notFound(); const locale = await getLocale(); const dictionary = getDictionary(locale); const content = localizeProduct(product, locale);
-  return <><section className={`product-detail-hero tone-${product.slug}`}><Container><ButtonLink href={localizePath(locale, "/products")} variant="secondary" className="mb-10 border-ink/10 bg-white/60"><ArrowLeft size={16} /> {dictionary.common.allProducts}</ButtonLink><div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20"><div><p className={`eyebrow text-${product.slug}`}>{content.category} · {locale === "id" ? "Produk Sadani" : "A Sadani product"}</p><h1>{content.tagline}</h1><p>{content.shortDescription}</p><ButtonLink href={localizePath(locale, "/contact")} className="mt-8">{locale === "id" ? `Bicara tentang ${product.name}` : `Talk to us about ${product.name}`}<ArrowRight size={16} /></ButtonLink></div><ProductVisual product={product.slug} locale={locale} /></div></Container></section><section className="section bg-white"><Container><div className="grid gap-12 lg:grid-cols-[.9fr_1.1fr] lg:gap-24"><div><p className={`eyebrow text-${product.slug}`}>{dictionary.common.product}</p><h2 className="section-title mt-4">{locale === "id" ? "Dibangun di atas jalan ke depan yang lebih jelas." : "Built around a clearer way forward."}</h2></div><div className="detail-copy"><p>{content.introduction}</p><h3>{dictionary.common.problem}</h3><p>{content.problem}</p><h3>{dictionary.common.philosophy}</h3><p>{content.philosophy}</p></div></div></Container></section><section className="section bg-surface"><Container><p className={`eyebrow text-${product.slug}`}>{dictionary.common.corePreview}</p><h2 className="section-title mt-4 max-w-2xl">{locale === "id" ? "Fondasi yang terfokus untuk produk." : "A focused foundation for the product."}</h2><div className="mt-10 grid gap-4 md:grid-cols-3">{content.features.map((feature) => <article className="feature-card" key={feature.title}><CheckCircle2 size={22} className={`text-${product.slug}`} /><h3>{feature.title}</h3><p>{feature.description}</p></article>)}</div><div className="status-panel mt-10"><span>{dictionary.common.status}</span><p>{content.status}</p></div>{product.slug === "serahin" && <div className="pay-links mt-6"><a href={localizePath(locale, "/payments")}>{locale === "id" ? "Cara pelanggan membayar" : "How customers pay"}<ArrowRight size={14} /></a><a href={localizePath(locale, "/pricing")}>{dictionary.nav.pricing}<ArrowRight size={14} /></a><a href={localizePath(locale, "/refunds")}>{locale === "id" ? "Kebijakan pengembalian dana" : "Refund policy"}<ArrowRight size={14} /></a>{product.website && <a href={product.website} target="_blank" rel="noopener noreferrer">{locale === "id" ? "Situs Serahin" : "Serahin site"}<ArrowRight size={14} /></a>}</div>}</Container></section><FinalCta locale={locale} dictionary={dictionary} /></>;
+  const { slug } = await params;
+  const product = getProduct(slug);
+  if (!product) notFound();
+  const locale = await getLocale();
+  const dictionary = getDictionary(locale);
+  const content = localizeProduct(product, locale);
+  const hasCommerceLinks = product.slug === "serahin" || product.slug === "manifly";
+
+  return (
+    <>
+      <section className={`product-detail-hero tone-${product.slug}`}>
+        <Container>
+          <ButtonLink href={localizePath(locale, "/products")} variant="secondary" className="mb-10 border-ink/10 bg-white/60">
+            <ArrowLeft size={16} /> {dictionary.common.allProducts}
+          </ButtonLink>
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+            <div>
+              <p className={`eyebrow text-${product.slug}`}>
+                {content.category} · {locale === "id" ? "Produk Sadani" : "A Sadani product"}
+              </p>
+              <h1>{content.tagline}</h1>
+              <p>{content.shortDescription}</p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                {product.website && (
+                  <ButtonLink href={product.website} target="_blank" rel="noopener noreferrer">
+                    {locale === "id" ? `Buka ${product.name}` : `Open ${product.name}`} <ArrowRight size={16} />
+                  </ButtonLink>
+                )}
+                <ButtonLink href={localizePath(locale, "/contact")} variant={product.website ? "secondary" : "primary"}>
+                  {locale === "id" ? `Bicara tentang ${product.name}` : `Talk to us about ${product.name}`} <ArrowRight size={16} />
+                </ButtonLink>
+              </div>
+            </div>
+            <ProductVisual product={product.slug} locale={locale} />
+          </div>
+        </Container>
+      </section>
+
+      <section className="section bg-white">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-[.9fr_1.1fr] lg:gap-24">
+            <div>
+              <p className={`eyebrow text-${product.slug}`}>{dictionary.common.product}</p>
+              <h2 className="section-title mt-4">
+                {locale === "id" ? "Dibangun di atas jalan ke depan yang lebih jelas." : "Built around a clearer way forward."}
+              </h2>
+            </div>
+            <div className="detail-copy">
+              <p>{content.introduction}</p>
+              <h3>{dictionary.common.problem}</h3>
+              <p>{content.problem}</p>
+              <h3>{dictionary.common.philosophy}</h3>
+              <p>{content.philosophy}</p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="section bg-surface">
+        <Container>
+          <p className={`eyebrow text-${product.slug}`}>{dictionary.common.corePreview}</p>
+          <h2 className="section-title mt-4 max-w-2xl">
+            {locale === "id" ? "Fondasi yang terfokus untuk produk." : "A focused foundation for the product."}
+          </h2>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {content.features.map((feature) => (
+              <article className="feature-card" key={feature.title}>
+                <CheckCircle2 size={22} className={`text-${product.slug}`} />
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+              </article>
+            ))}
+          </div>
+          <div className="status-panel mt-10">
+            <span>{dictionary.common.status}</span>
+            <p>{content.status}</p>
+          </div>
+          {hasCommerceLinks && (
+            <div className="pay-links mt-6">
+              <a href={localizePath(locale, "/payments")}>{locale === "id" ? "Cara pembayaran" : "How payments work"}<ArrowRight size={14} /></a>
+              <a href={localizePath(locale, "/pricing")}>{dictionary.nav.pricing}<ArrowRight size={14} /></a>
+              <a href={localizePath(locale, "/refunds")}>{locale === "id" ? "Kebijakan pengembalian dana" : "Refund policy"}<ArrowRight size={14} /></a>
+              {product.website && (
+                <a href={product.website} target="_blank" rel="noopener noreferrer">
+                  {locale === "id" ? `Situs ${product.name}` : `${product.name} site`} <ArrowRight size={14} />
+                </a>
+              )}
+            </div>
+          )}
+        </Container>
+      </section>
+
+      <FinalCta locale={locale} dictionary={dictionary} />
+    </>
+  );
 }

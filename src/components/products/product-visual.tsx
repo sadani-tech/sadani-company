@@ -3,8 +3,12 @@ import type { ProductTone } from "@/config/products";
 import type { Locale } from "@/i18n/config";
 
 export function ProductVisual({ product, compact = false, locale = "id" }: { product: ProductTone; compact?: boolean; locale?: Locale }) {
-  return <div className={`product-visual product-visual-${product} ${compact ? "product-visual-compact" : ""}`} aria-label={`Conceptual ${product} interface preview`} role="img">
-    <span className="concept-label">{locale === "id" ? "Pratinjau konsep" : "Concept preview"}</span>
+  const implemented = product === "serahin" || product === "manifly";
+  const label = implemented
+    ? locale === "id" ? "Ilustrasi produk" : "Product illustration"
+    : locale === "id" ? "Pratinjau konsep" : "Concept preview";
+  return <div className={`product-visual product-visual-${product} ${compact ? "product-visual-compact" : ""}`} aria-label={`${product} ${label.toLowerCase()}`} role="img">
+    <span className="concept-label">{label}</span>
     {product === "serahin" && <SerahinVisual locale={locale} />}
     {product === "manifly" && <ManiflyVisual locale={locale} />}
     {product === "tuju" && <TujuVisual locale={locale} />}
