@@ -11,8 +11,6 @@ export function Footer({ locale, dictionary }: { locale: Locale; dictionary: Dic
   const companyLinks = [
     { label: dictionary.nav.about, href: "/about" },
     { label: dictionary.nav.products, href: "/products" },
-    { label: dictionary.nav.pricing, href: "/pricing" },
-    { label: dictionary.nav.payments, href: "/payments" },
     { label: dictionary.nav.contact, href: "/contact" },
     { label: dictionary.nav.careers, href: "/careers" },
   ];

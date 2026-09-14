@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, CheckCircle2 } from "lucide-react";
 import { notFound } from "next/navigation";
 import { ProductVisual } from "@/components/products/product-visual";
 import { FinalCta } from "@/components/sections/final-cta";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Container } from "@/components/ui/container";
 import { getProduct, localizeProduct, products } from "@/config/products";
+import { getPricing } from "@/config/pricing";
 import { getDictionary } from "@/i18n/dictionaries";
 import { localizePath } from "@/i18n/config";
 import { getLocale } from "@/i18n/server";
@@ -44,7 +45,9 @@ export default async function ProductPage({ params }: Props) {
   const locale = await getLocale();
   const dictionary = getDictionary(locale);
   const content = localizeProduct(product, locale);
-  const hasCommerceLinks = product.slug === "serahin" || product.slug === "manifly";
+  const pricing = getPricing(locale).find((group) => group.slug === product.slug);
+  const paymentSteps = product.slug === "serahin" ? dictionary.payments.serahinSteps : product.slug === "manifly" ? dictionary.payments.maniflySteps : null;
+  const paymentTitle = product.slug === "serahin" ? dictionary.payments.serahinFlowTitle : product.slug === "manifly" ? dictionary.payments.maniflyFlowTitle : null;
 
   return (
     <>
@@ -115,20 +118,51 @@ export default async function ProductPage({ params }: Props) {
             <span>{dictionary.common.status}</span>
             <p>{content.status}</p>
           </div>
-          {hasCommerceLinks && (
-            <div className="pay-links mt-6">
-              <a href={localizePath(locale, "/payments")}>{locale === "id" ? "Cara pembayaran" : "How payments work"}<ArrowRight size={14} /></a>
-              <a href={localizePath(locale, "/pricing")}>{dictionary.nav.pricing}<ArrowRight size={14} /></a>
-              <a href={localizePath(locale, "/refunds")}>{locale === "id" ? "Kebijakan pengembalian dana" : "Refund policy"}<ArrowRight size={14} /></a>
-              {product.website && (
-                <a href={product.website} target="_blank" rel="noopener noreferrer">
-                  {locale === "id" ? `Situs ${product.name}` : `${product.name} site`} <ArrowRight size={14} />
-                </a>
-              )}
-            </div>
-          )}
         </Container>
       </section>
+
+      {pricing && paymentSteps && paymentTitle && (
+        <section className="section bg-white">
+          <Container>
+            <p className={`eyebrow text-${product.slug}`}>{locale === "id" ? "Harga & pembayaran" : "Pricing & payments"}</p>
+            <h2 className="section-title mt-4">{pricing.audience}</h2>
+            <p className="mt-4 max-w-2xl text-muted">{pricing.note}</p>
+            <div className="plan-grid mt-10">
+              {pricing.plans.map((plan) => (
+                <div className={`plan ${plan.featured ? "plan-featured" : ""}`} key={plan.name}>
+                  <p className="plan-name">{plan.name}</p>
+                  <p className="plan-price">{plan.price}<small>{plan.cadence}</small></p>
+                  <p className="plan-summary">{plan.summary}</p>
+                  <ul className="plan-list">
+                    {plan.items.map((item) => <li key={item}><Check size={15} aria-hidden="true" /><span>{item}</span></li>)}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            <div className="pricing-note mt-8">
+              <strong>{dictionary.pricing.perOrderTitle}. </strong>
+              {product.slug === "serahin" ? dictionary.pricing.perOrderCopy : locale === "id" ? "Paket berbayar menggunakan langganan bulanan dan hanya aktif setelah pembayaran terverifikasi." : "Paid plans use monthly subscriptions and activate only after verified payment."}
+            </div>
+            <h3 className="mt-14 text-2xl">{paymentTitle}</h3>
+            <div className="pay-flow mt-8">
+              {paymentSteps.map(([title, body], index) => (
+                <div className="pay-step" key={title}>
+                  <span aria-hidden="true">{index + 1}</span>
+                  <div><h3>{title}</h3><p>{body}</p></div>
+                </div>
+              ))}
+            </div>
+            <div className="pay-panel-grid mt-10">
+              <div className="pay-panel"><h3>{dictionary.payments.securityTitle}</h3><p>{dictionary.payments.securityCopy}</p></div>
+              <div className="pay-panel"><h3>{dictionary.payments.currencyTitle}</h3><p>{dictionary.payments.currencyCopy}</p></div>
+            </div>
+            <div className="pay-links mt-8">
+              <a href={localizePath(locale, "/refunds")}>{locale === "id" ? "Kebijakan pengembalian dana" : "Refund policy"}<ArrowRight size={14} /></a>
+              <a href={localizePath(locale, "/contact")}>{dictionary.payments.contactLink}<ArrowRight size={14} /></a>
+            </div>
+          </Container>
+        </section>
+      )}
 
       <FinalCta locale={locale} dictionary={dictionary} />
     </>

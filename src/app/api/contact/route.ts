@@ -18,14 +18,23 @@ export async function POST(request: Request) {
   if (parsed.data.website) return NextResponse.json({ message: locale === "id" ? "Terima kasih. Pesan Anda telah diterima." : "Thanks. Your message has been received." });
   const result = await getContactService().send(parsed.data);
   if (!result.delivered) {
-    if (siteConfig.email) {
-      return NextResponse.json({
-        message: locale === "id"
-          ? `Terima kasih, pesan Anda telah kami terima. Untuk balasan yang lebih cepat, email langsung ke ${siteConfig.email}.`
-          : `Thanks, we've received your message. For a faster reply, email us directly at ${siteConfig.email}.`,
-      });
-    }
-    return NextResponse.json({ message: locale === "id" ? "Pengiriman kontak belum dikonfigurasi." : "Contact delivery is not configured yet." }, { status: 503 });
+    const whatsappMessage = [
+      "Halo Sadani, saya ingin menghubungi tim Sadani.",
+      "",
+      `Nama: ${parsed.data.name}`,
+      `Email: ${parsed.data.email}`,
+      parsed.data.company ? `Perusahaan: ${parsed.data.company}` : "",
+      `Topik: ${parsed.data.inquiryType}`,
+      "",
+      parsed.data.message,
+    ].filter(Boolean).join("\n");
+    const whatsappUrl = `https://wa.me/${siteConfig.phone.href.replace(/\D/g, "")}?text=${encodeURIComponent(whatsappMessage)}`;
+    return NextResponse.json({
+      message: locale === "id"
+        ? "Email belum dapat dikirim. Anda akan diarahkan ke WhatsApp dengan isi pesan yang sama."
+        : "Email could not be sent. You will be redirected to WhatsApp with the same message.",
+      whatsappUrl,
+    });
   }
   return NextResponse.json({ message: locale === "id" ? "Terima kasih. Pesan Anda telah dikirim ke Sadani." : "Thanks. Your message has been sent to Sadani." });
 }
