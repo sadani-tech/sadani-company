@@ -37,7 +37,7 @@ export default async function PaymentsPage() {
     <>
       <section className="page-hero">
         <Container>
-          <p className="eyebrow text-green">{t.eyebrow}</p>
+          <p className="eyebrow text-gold">{t.eyebrow}</p>
           <h1>{t.title}</h1>
           <p>{t.copy}</p>
           <div className="pay-hero-meta">
@@ -99,7 +99,7 @@ export default async function PaymentsPage() {
               </p>
               <div className="mt-4 flex gap-2" aria-hidden="true">
                 {methodIcons.map((Icon, index) => (
-                  <span key={index} className="grid h-9 w-9 place-items-center rounded-lg border border-ink/10 text-green">
+                  <span key={index} className="grid h-9 w-9 place-items-center rounded-lg border border-ink/10 text-gold">
                     <Icon size={16} />
                   </span>
                 ))}

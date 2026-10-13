@@ -25,7 +25,7 @@ export function LegalPage({
     <>
       <section className="page-hero page-hero-compact">
         <Container>
-          <p className="eyebrow text-green">{eyebrow}</p>
+          <p className="eyebrow text-gold">{eyebrow}</p>
           <h1>{title}</h1>
           <p>{intro}</p>
         </Container>

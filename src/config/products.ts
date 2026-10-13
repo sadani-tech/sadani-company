@@ -14,8 +14,8 @@ interface LocalizedProduct {
 export interface Product extends LocalizedProduct {
   slug: ProductTone;
   name: string;
-  /** Shown in the homepage orbit + ecosystem diagram (exactly three slots). */
-  featured: boolean;
+  /** Showcase image used by the homepage product scene. */
+  cover: string;
   /** Live product site, when one is publicly accessible. */
   website?: string;
   id: LocalizedProduct;
@@ -25,7 +25,7 @@ export const products: readonly Product[] = [
   {
     slug: "serahin",
     name: "Serahin",
-    featured: true,
+    cover: "/products/serahin/cover.svg",
     website: "https://serahin.suraise.com",
     category: "Commerce",
     shortDescription:
@@ -67,7 +67,7 @@ export const products: readonly Product[] = [
   {
     slug: "manifly",
     name: "Manifly",
-    featured: true,
+    cover: "/products/manifly/cover.jpg",
     website: "https://app.manifly.id",
     category: "Personal Finance",
     shortDescription:
@@ -109,7 +109,7 @@ export const products: readonly Product[] = [
   {
     slug: "tuju",
     name: "Tuju",
-    featured: true,
+    cover: "/products/tuju/cover.svg",
     category: "Career",
     shortDescription:
       "Career guidance designed to help people understand where they are, where they want to go, and how to get there.",
@@ -148,7 +148,7 @@ export const products: readonly Product[] = [
   {
     slug: "insuralab",
     name: "InsuraLab",
-    featured: false,
+    cover: "/products/insuralab/cover.svg",
     category: "Insurance Education",
     shortDescription:
       "An independent, provider-agnostic platform that helps people understand risk and how insurance protection works before they decide.",
@@ -187,8 +187,6 @@ export const products: readonly Product[] = [
     },
   },
 ] as const;
-
-export const featuredProducts = products.filter((product) => product.featured);
 
 export function getProduct(slug: string) {
   return products.find((product) => product.slug === slug);
