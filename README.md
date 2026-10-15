@@ -35,6 +35,15 @@ Preview), matching `.env.example`:
 | `RESEND_API_KEY` | Optional — only when a real contact-delivery provider is wired into `src/lib/contact.ts`. |
 | `NEXT_PUBLIC_GA_ID` | Optional analytics id. |
 
+## Design
+
+The visual design (Montserrat, ink/grey/gold palette, pill navigation, footer) comes from the static Sadani landing page and is shared by every page. Styles live in two files:
+
+- `src/app/sadani.css` — site chrome, the `.btn` buttons, and the homepage scenes, ported from the landing page. Its `.frame` is the landing page's `.container` and `.kicker` its `.eyebrow`, renamed to avoid clashing with Tailwind and the inner pages.
+- `src/app/globals.css` — Tailwind theme tokens and inner-page components.
+
+The homepage (`src/components/home/*`) is server-rendered. `HomeMotion` adds the scroll-locked scenes, the hero intro, and the reveals on the client. Homepage copy lives under `home` in `src/i18n/dictionaries.ts`, and product names, categories, and descriptions come from `src/config/products.ts`. Assets are in `public/brand`, `public/home` (AI image, capability icons, scroll-scrubbed video), and `public/products/<slug>/cover.*`.
+
 ## Languages
 
 Bahasa Indonesia is the default language and uses routes without a locale prefix. English uses the `/en` prefix:

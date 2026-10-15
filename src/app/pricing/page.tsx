@@ -31,7 +31,7 @@ export default async function PricingPage() {
     <>
       <section className="page-hero">
         <Container>
-          <p className="eyebrow text-green">{t.eyebrow}</p>
+          <p className="eyebrow text-gold">{t.eyebrow}</p>
           <h1>{t.title}</h1>
           <p>{t.copy}</p>
         </Container>
@@ -73,7 +73,7 @@ export default async function PricingPage() {
                   : id
                     ? "Paket berbayar menggunakan langganan bulanan dan hanya aktif setelah pembayaran terverifikasi."
                     : "Paid plans use monthly subscriptions and activate only after verified payment."}{" "}
-                <a className="font-semibold text-green" href={localizePath(locale, "/payments")}>
+                <a className="font-semibold text-gold" href={localizePath(locale, "/payments")}>
                   {t.seePayments} →
                 </a>
               </div>
