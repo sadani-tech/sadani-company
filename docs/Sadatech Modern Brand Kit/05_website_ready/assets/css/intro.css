@@ -1,0 +1,96 @@
+/* =========================================================
+   HERO INTRO — page-load reveal (keyframe based)
+   Loaded after style.css. main.js adds .is-loaded to <html>
+   once the logo and fonts are ready. Keyframe animations
+   always play from their first frame, even if the page
+   loads instantly from cache.
+
+   Timeline:
+     0.0s   aurora glow rises and blooms from the bottom
+     0.4s   nav pill drops in
+     0.5s   "Imagine. Build." rises word by word
+     0.75s  "Make It Real." rises word by word
+     0.7s   3D logo lifts up, un-blurs and straightens
+     1.1s+  buttons, copyright, note, scroll pill (--d in index.html)
+     2.2s   light sheen sweeps across the logo
+   ========================================================= */
+
+/* ---- Hidden until the intro starts ---- */
+html:not(.is-loaded) .hero__stage .aurora,
+html:not(.is-loaded) .nav__pill,
+html:not(.is-loaded) .hero__logo img,
+html:not(.is-loaded) .intro-fade { opacity: 0; }
+html:not(.is-loaded) .hero__title .w__i { transform: translateY(112%); }
+
+/* 1. Section — aurora glow rises from below and blooms */
+.is-loaded .hero__stage .aurora {
+  transform-origin: 50% 100%;
+  animation: intro-aurora 2.6s var(--ease-out) 0s both;
+}
+@keyframes intro-aurora {
+  from { opacity: 0; transform: translateY(30%) scale(1.15); }
+  60%  { opacity: 1; }
+  to   { opacity: 1; transform: none; }
+}
+
+/* 2. Nav */
+.is-loaded .nav__pill { animation: intro-nav 1.1s var(--ease-out) .4s both; }
+@keyframes intro-nav {
+  from { opacity: 0; transform: translateY(-140%); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* 3. Headline — words rise out of a mask with a slight tilt */
+.hero__title .w__i { transform-origin: 0 100%; }
+.is-loaded .hero__title .w__i { animation: intro-word 1.3s var(--ease-out) both; animation-delay: calc(.5s + var(--i) * .09s); }
+.is-loaded .hero__l2 .w__i { animation-delay: calc(.75s + var(--i) * .09s); }
+@keyframes intro-word {
+  from { transform: translateY(112%) rotate(6deg); }
+  to   { transform: none; }
+}
+
+/* 4. 3D logo — lifts, un-blurs, straightens */
+.is-loaded .hero__logo img { animation: intro-logo 2s var(--ease-out) .7s both; }
+@keyframes intro-logo {
+  from { opacity: 0; transform: translateY(90px) scale(.86); filter: blur(16px) drop-shadow(0 30px 40px rgba(90, 70, 20, .18)); }
+  60%  { opacity: 1; }
+  to   { opacity: 1; transform: none; filter: blur(0) drop-shadow(0 30px 40px rgba(90, 70, 20, .18)); }
+}
+
+/* 4b. Logo sheen, masked to the logo shape */
+.hero__logo-tilt { position: relative; }
+.hero__logo-tilt::after {
+  content: ""; position: absolute; inset: 0; opacity: 0; pointer-events: none;
+  background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, .8) 50%, transparent 62%);
+  background-size: 250% 100%;
+  background-position: 150% 0;
+  -webkit-mask: url(../img/sadatech-logo-3d.webp) center / contain no-repeat;
+          mask: url(../img/sadatech-logo-3d.webp) center / contain no-repeat;
+}
+.is-loaded .hero__logo-tilt::after { animation: intro-sheen 1.6s var(--ease-io) 2.2s forwards; }
+@keyframes intro-sheen {
+  from { opacity: 1; background-position: 150% 0; }
+  to   { opacity: 1; background-position: -50% 0; }
+}
+
+/* 5. Small elements — fade, rise, un-blur. Start time = --d on each element */
+.is-loaded .intro-fade { animation: intro-fade 1.2s var(--ease-out) var(--d, 0s) both; }
+@keyframes intro-fade {
+  from { opacity: 0; transform: translateY(24px); filter: blur(6px); }
+  to   { opacity: 1; transform: none; filter: none; }
+}
+/* the scroll pill is centred with translateX(-50%), so it gets its own version */
+.is-loaded .hero__scroll.intro-fade { animation-name: intro-fade-centered; }
+@keyframes intro-fade-centered {
+  from { opacity: 0; transform: translate(-50%, 24px); filter: blur(6px); }
+  to   { opacity: 1; transform: translateX(-50%); filter: none; }
+}
+
+/* Reduced motion: show everything immediately */
+@media (prefers-reduced-motion: reduce) {
+  .hero__stage .aurora, .nav__pill, .hero__title .w__i, .hero__logo img, .intro-fade {
+    animation: none !important; opacity: 1 !important;
+  }
+  .hero__title .w__i { transform: none !important; }
+  .hero__logo-tilt::after { display: none; }
+}

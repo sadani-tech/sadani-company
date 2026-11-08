@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Tuju app on a tablet">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9E9E6"/><stop offset="1" stop-color="#D4D3CD"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8F8F8F"/><stop offset="1" stop-color="#F2C94C"/></linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="30"/></filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="70"/></filter>
+    <clipPath id="scr"><rect x="0" y="0" width="560" height="400" rx="14"/></clipPath>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <ellipse cx="260" cy="140" rx="340" ry="200" fill="#fff" opacity=".75" filter="url(#soft)"/>
+  <rect x="0" y="600" width="1200" height="200" fill="#C9C7C0"/>
+  <!-- notebook & pen -->
+  <rect x="120" y="520" width="200" height="120" rx="6" fill="#F3F2EE" transform="rotate(-8 220 580)"/>
+  <rect x="930" y="560" width="190" height="10" rx="5" fill="#2A2A2A" transform="rotate(14 1020 565)"/>
+  <ellipse cx="610" cy="690" rx="340" ry="30" fill="#000" opacity=".26" filter="url(#sh)"/>
+  <g transform="translate(305 200)">
+    <rect x="-22" y="-22" width="604" height="444" rx="30" fill="#2B2B2B"/>
+    <g clip-path="url(#scr)">
+      <rect width="560" height="400" fill="#F4F3EF"/>
+      <!-- map -->
+      <g stroke="#E2E0D8" stroke-width="14" fill="none">
+        <path d="M-20 90 C120 120 200 40 360 90 S520 160 600 120"/>
+        <path d="M80 -20 C120 120 60 260 140 420"/>
+        <path d="M300 -20 C280 140 380 260 340 420"/>
+        <path d="M-20 300 C160 280 260 340 600 300"/>
+      </g>
+      <path d="M-10 230 C80 200 120 250 200 230 S300 180 330 230 S420 300 470 270" fill="none" stroke="#DCE3E6" stroke-width="30"/>
+      <path d="M120 320 C170 250 210 210 260 180 S360 120 420 110" fill="none" stroke="#1A1A1A" stroke-width="5" stroke-dasharray="2 10" stroke-linecap="round"/>
+      <circle cx="120" cy="320" r="12" fill="#fff" stroke="#1A1A1A" stroke-width="4"/>
+      <circle cx="260" cy="180" r="9" fill="#1A1A1A"/>
+      <circle cx="420" cy="110" r="16" fill="url(#gold)"/><circle cx="420" cy="110" r="6" fill="#fff"/>
+      <!-- side panel -->
+      <rect x="360" y="170" width="180" height="210" rx="16" fill="#fff"/>
+      <text x="378" y="200" font-family="Montserrat, Arial, sans-serif" font-weight="700" font-size="15" fill="#1A1A1A">Tuju</text>
+      <text x="378" y="222" font-family="Montserrat, Arial, sans-serif" font-size="11" fill="#8A8A8A">Solo → Yogyakarta</text>
+      <g fill="#1A1A1A">
+        <circle cx="386" cy="250" r="5" fill="url(#gold)"/><rect x="400" y="246" width="100" height="7" rx="3.5"/>
+        <circle cx="386" cy="276" r="5"/><rect x="400" y="272" width="80" height="7" rx="3.5"/>
+        <circle cx="386" cy="302" r="5"/><rect x="400" y="298" width="110" height="7" rx="3.5"/>
+      </g>
+      <rect x="378" y="328" width="144" height="36" rx="18" fill="#1A1A1A"/>
+      <text x="450" y="351" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-weight="600" font-size="11" fill="#fff">Mulai perjalanan</text>
+      <rect x="20" y="20" width="220" height="40" rx="20" fill="#fff"/>
+      <circle cx="44" cy="40" r="7" fill="none" stroke="#1A1A1A" stroke-width="2.5"/>
+      <rect x="62" y="36" width="120" height="8" rx="4" fill="#A5A5A0"/>
+    </g>
+  </g>
+</svg>

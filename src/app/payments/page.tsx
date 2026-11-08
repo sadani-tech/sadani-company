@@ -1,3 +1,4 @@
+import { createPageMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 import { ArrowUpRight, CreditCard, Landmark, Lock, RefreshCw, Wallet } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
@@ -9,14 +10,14 @@ import { getLocale } from "@/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  return {
+  return createPageMetadata(locale, {
     title: locale === "id" ? "Pembayaran" : "Payments",
     description:
       locale === "id"
-        ? "Cara pembayaran pesanan Serahin dan membership Manifly diproses melalui payment-service Sadani."
-        : "How Serahin order payments and Manifly memberships are processed through Sadani's payment service.",
+        ? "Cara pembayaran pesanan Serahin dan membership Manifly diproses melalui payment-service Sadatech."
+        : "How Serahin order payments and Manifly memberships are processed through Sadatech's payment service.",
     alternates: { canonical: localizePath(locale, "/payments"), languages: { id: "/payments", en: "/en/payments" } },
-  };
+  });
 }
 
 const methodIcons = [Landmark, CreditCard, Wallet, Lock];

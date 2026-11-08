@@ -1,0 +1,11 @@
+/* Sadatech / Option B - Sculpted Modern | Design tokens */
+:root {
+  --sadatech-charcoal: #28282D;
+  --sadatech-near-black: #161719;
+  --sadatech-gold: #C99D4B;
+  --sadatech-gold-light: #E2B763;
+  --sadatech-ivory: #FFF9F0;
+  --sadatech-silver: #A4A6A9;
+  --sadatech-font: "Montserrat", "Inter", Arial, sans-serif;
+}
+/* Example: .brand--dark { background: var(--sadatech-near-black); color: white; } */

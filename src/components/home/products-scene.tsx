@@ -23,7 +23,7 @@ export function HomeProductsScene({ locale, dictionary }: { locale: Locale; dict
         <div className="proj" data-proj data-dir="down">
           <div className="proj__card">
             <div className="proj__card-bg" aria-hidden="true">
-              {items.map((item, i) => <Image key={item.slug} src={item.cover} alt="" width={1200} height={800} className={active(i)} data-i={i} unoptimized />)}
+              {items.map((item, i) => <Image key={item.slug} src={item.cover} alt="" width={1200} height={1000} className={active(i)} data-i={i} unoptimized />)}
             </div>
             <div className="proj__titles">
               {items.map((item, i) => (
@@ -45,7 +45,7 @@ export function HomeProductsScene({ locale, dictionary }: { locale: Locale; dict
           </div>
 
           <div className="proj__media" aria-hidden="true">
-            {items.map((item, i) => <Image key={item.slug} src={item.cover} alt="" width={1200} height={800} className={active(i)} data-i={i} unoptimized priority={i === 0} />)}
+            {items.map((item, i) => <Image key={item.slug} src={item.cover} alt="" width={1200} height={1000} className={active(i)} data-i={i} unoptimized priority={i === 0} />)}
           </div>
 
           <div className="proj__info">

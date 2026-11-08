@@ -1,3 +1,4 @@
+import { createPageMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal/legal-page";
 import { siteConfig } from "@/config/site";
@@ -7,14 +8,14 @@ import { getLocale } from "@/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  return {
+  return createPageMetadata(locale, {
     title: locale === "id" ? "Kebijakan Pengembalian Dana" : "Refund Policy",
     description:
       locale === "id"
         ? "Panduan pengembalian dana dan pembatalan untuk pesanan Serahin dan membership Manifly."
         : "Refund and cancellation guidance for Serahin orders and Manifly memberships.",
     alternates: { canonical: localizePath(locale, "/refunds"), languages: { id: "/refunds", en: "/en/refunds" } },
-  };
+  });
 }
 
 export default async function RefundsPage() {
@@ -48,8 +49,8 @@ export default async function RefundsPage() {
       </p>
       <p>
         {id
-          ? "Tagihan ganda, nominal tidak sesuai, atau kegagalan teknis pembayaran dapat dieskalasikan ke Sadani. Payment-service saat ini tidak menyediakan refund otomatis; penyelesaian yang disetujui akan diinformasikan bersama metode dan estimasi waktunya. Jangan mengirim PIN, OTP, password, atau nomor kartu penuh."
-          : "Duplicate charges, incorrect amounts, or technical payment failures can be escalated to Sadani. The payment service does not currently provide automated refunds; an approved resolution will include the method and expected timing. Never send a PIN, OTP, password, or full card number."}
+          ? "Tagihan ganda, nominal tidak sesuai, atau kegagalan teknis pembayaran dapat dieskalasikan ke Sadatech. Payment-service saat ini tidak menyediakan refund otomatis; penyelesaian yang disetujui akan diinformasikan bersama metode dan estimasi waktunya. Jangan mengirim PIN, OTP, password, atau nomor kartu penuh."
+          : "Duplicate charges, incorrect amounts, or technical payment failures can be escalated to Sadatech. The payment service does not currently provide automated refunds; an approved resolution will include the method and expected timing. Never send a PIN, OTP, password, or full card number."}
       </p>
 
       <h2>Manifly · {id ? "membership bulanan" : "monthly memberships"}</h2>

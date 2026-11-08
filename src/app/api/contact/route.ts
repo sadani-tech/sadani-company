@@ -19,7 +19,7 @@ export async function POST(request: Request) {
   const result = await getContactService().send(parsed.data);
   if (!result.delivered) {
     const whatsappMessage = [
-      "Halo Sadani, saya ingin menghubungi tim Sadani.",
+      "Halo Sadatech, saya ingin menghubungi tim Sadatech.",
       "",
       `Nama: ${parsed.data.name}`,
       `Email: ${parsed.data.email}`,
@@ -36,5 +36,5 @@ export async function POST(request: Request) {
       whatsappUrl,
     });
   }
-  return NextResponse.json({ message: locale === "id" ? "Terima kasih. Pesan Anda telah dikirim ke Sadani." : "Thanks. Your message has been sent to Sadani." });
+  return NextResponse.json({ message: locale === "id" ? "Terima kasih. Pesan Anda telah dikirim ke Sadatech." : "Thanks. Your message has been sent to Sadatech." });
 }

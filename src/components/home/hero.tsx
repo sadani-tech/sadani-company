@@ -24,7 +24,7 @@ export function HomeHero({ locale, home }: { locale: Locale; home: Dictionary["h
                 <ActionLink href={localizePath(locale, "/contact")}>{home.start}</ActionLink>
                 <ActionLink href="#company" variant="light">{home.about}</ActionLink>
               </div>
-              <p className="hero__copy intro-fade" style={delay("1.25s")}>©Copyright {new Date().getFullYear()} - Sadani Tech.</p>
+              <p className="hero__copy intro-fade" style={delay("1.25s")}>©Copyright {new Date().getFullYear()} - Sadatech.</p>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@ export function HomeHero({ locale, home }: { locale: Locale; home: Dictionary["h
 
         <div className="hero__logo" data-hero-logo>
           <div className="hero__logo-tilt" data-tilt>
-            <Image src="/brand/sadani-logo-3d.webp" alt={locale === "id" ? "Logo 3D Sadani berwarna perak dan emas" : "Sadani 3D logo mark in brushed silver and gold"} width={1162} height={1272} unoptimized priority />
+            <Image src="/brand/sadani-logo-3d.webp" alt={locale === "id" ? "Logo 3D Sadatech berwarna perak dan emas" : "Sadatech 3D logo mark in brushed silver and gold"} width={1096} height={1200} unoptimized priority />
           </div>
         </div>
 

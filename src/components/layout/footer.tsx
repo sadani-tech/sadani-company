@@ -28,8 +28,9 @@ export function Footer({ locale, dictionary }: { locale: Locale; dictionary: Dic
           <div className="footer__brand">
             <Logo className="footer__logo" href={localizePath(locale, "/")} />
             <p>
-              {id ? "PT Sadani Teknologi Indonesia membangun dan mengelola produk digital, platform perangkat lunak, dan solusi teknologi untuk menyederhanakan masalah sehari-hari." : siteConfig.longDescription}
+              {id ? "Sadatech membangun dan mengelola produk digital, platform perangkat lunak, dan solusi teknologi untuk menyederhanakan masalah sehari-hari." : siteConfig.longDescription}
             </p>
+            <p>{id ? "Dioperasikan oleh" : "Operated by"} {siteConfig.legalName}.</p>
           </div>
           <div className="footer__cols">
             <FooterColumn title={id ? "Perusahaan" : "Company"} links={companyLinks.map((link) => ({ label: link.label, href: localizePath(locale, link.href) }))} />

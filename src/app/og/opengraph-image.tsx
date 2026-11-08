@@ -1,5 +1,0 @@
-import { ImageResponse } from "next/og";
-export const alt = "Sadani — Imagine. Build. Make It Real.";
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
-export default function Image() { return new ImageResponse(<div style={{ background: "linear-gradient(180deg, #F3F3F3 0%, #FFFDF4 55%, #FCF1C4 100%)", color: "#1A1A1A", width: "100%", height: "100%", display: "flex", padding: 72, fontFamily: "sans-serif", position: "relative", alignItems: "flex-end" }}><div style={{ position: "absolute", left: 300, right: 300, bottom: -220, height: 420, borderRadius: 999, background: "radial-gradient(closest-side, rgba(246,216,98,.85), rgba(255,255,255,0))", display: "flex" }} /><div style={{ display: "flex", flexDirection: "column", maxWidth: 900 }}><div style={{ color: "#7A6420", fontSize: 22, letterSpacing: 4, textTransform: "uppercase", marginBottom: 30 }}>PT Sadani Teknologi Indonesia</div><div style={{ display: "flex", flexDirection: "column", fontSize: 92, lineHeight: 1.02, letterSpacing: -3 }}><span style={{ fontWeight: 400 }}>Imagine. Build.</span><span style={{ fontWeight: 700 }}>Make It Real.</span></div></div></div>, size); }

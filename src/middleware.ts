@@ -1,8 +1,19 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { getProduct } from "@/config/products";
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const headers = new Headers(request.headers);
+
+  // Reject unknown products before the async layout can stream a 200 response.
+  const productPath = pathname.replace(/^\/en(?=\/|$)/, "");
+  if (productPath.startsWith("/products/") && !getProduct(productPath.slice("/products/".length))) {
+    const locale = pathname.startsWith("/en/") || request.headers.get("x-sadani-locale") === "en" ? "en" : "id";
+    headers.set("x-sadani-locale", locale);
+    const response = NextResponse.rewrite(new URL("/404", request.url), { status: 404, request: { headers } });
+    response.headers.set("Content-Language", locale);
+    return response;
+  }
 
   if (request.headers.get("x-sadani-locale") === "en") {
     const response = NextResponse.next({ request: { headers } });

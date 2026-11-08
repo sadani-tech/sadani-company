@@ -1,3 +1,4 @@
+import { createPageMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal/legal-page";
 import { siteConfig } from "@/config/site";
@@ -6,14 +7,14 @@ import { getLocale } from "@/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  return {
+  return createPageMetadata(locale, {
     title: locale === "id" ? "Kebijakan Privasi" : "Privacy Policy",
     description:
       locale === "id"
-        ? "Bagaimana website Sadani menangani informasi, termasuk data terkait pembayaran."
-        : "How the Sadani website handles information, including payment-related data.",
+        ? "Bagaimana website Sadatech menangani informasi, termasuk data terkait pembayaran."
+        : "How the Sadatech website handles information, including payment-related data.",
     alternates: { canonical: localizePath(locale, "/privacy"), languages: { id: "/privacy", en: "/en/privacy" } },
-  };
+  });
 }
 
 export default async function PrivacyPage() {
@@ -28,8 +29,8 @@ export default async function PrivacyPage() {
       title={id ? "Kebijakan privasi" : "Privacy policy"}
       intro={
         id
-          ? "Gambaran tentang cara website ini dan layanan pembayaran Sadani menangani informasi."
-          : "An overview of how this website and Sadani's payment services handle information."
+          ? "Gambaran tentang cara website ini dan layanan pembayaran Sadatech menangani informasi."
+          : "An overview of how this website and Sadatech's payment services handle information."
       }
       draft={false}
       updated={id ? "Terakhir diperbarui: 11 September 2026" : "Last updated: September 11, 2026"}
@@ -44,8 +45,8 @@ export default async function PrivacyPage() {
       <h2>{id ? "Informasi pembayaran" : "Payment information"}</h2>
       <p>
         {id
-          ? "Pembayaran otomatis untuk pesanan Serahin dan membership Manifly diproses melalui payment-service Sadani dan halaman hosted penyedia pembayaran pihak ketiga. Rincian sensitif seperti nomor kartu penuh, PIN, password internet banking, dan OTP tidak disimpan oleh aplikasi produk Sadani. Kami menyimpan data terbatas yang diperlukan untuk pesanan, billing, dukungan, audit, dan rekonsiliasi, seperti status, jumlah, mata uang, waktu, referensi produk, serta referensi provider yang tidak sensitif."
-          : "Automatic payments for Serahin orders and Manifly memberships are processed through Sadani's payment service and a third-party provider's hosted page. Sensitive details such as full card numbers, PINs, internet-banking passwords, and OTPs are not stored by Sadani product applications. We retain limited data needed for orders, billing, support, audit, and reconciliation, such as status, amount, currency, time, product reference, and non-sensitive provider references."}
+          ? "Pembayaran otomatis untuk pesanan Serahin dan membership Manifly diproses melalui payment-service Sadatech dan halaman hosted penyedia pembayaran pihak ketiga. Rincian sensitif seperti nomor kartu penuh, PIN, password internet banking, dan OTP tidak disimpan oleh aplikasi produk Sadatech. Kami menyimpan data terbatas yang diperlukan untuk pesanan, billing, dukungan, audit, dan rekonsiliasi, seperti status, jumlah, mata uang, waktu, referensi produk, serta referensi provider yang tidak sensitif."
+          : "Automatic payments for Serahin orders and Manifly memberships are processed through Sadatech's payment service and a third-party provider's hosted page. Sensitive details such as full card numbers, PINs, internet-banking passwords, and OTPs are not stored by Sadatech product applications. We retain limited data needed for orders, billing, support, audit, and reconciliation, such as status, amount, currency, time, product reference, and non-sensitive provider references."}
       </p>
 
       <h2>{id ? "Informasi teknis" : "Technical information"}</h2>

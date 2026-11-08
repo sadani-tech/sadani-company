@@ -1,0 +1,2 @@
+# Preserve brand-kit PDFs byte-for-byte, including on Windows with core.autocrlf.
+*.pdf binary

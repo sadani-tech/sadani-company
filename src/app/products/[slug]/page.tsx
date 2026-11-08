@@ -1,3 +1,5 @@
+import { createPageMetadata } from "@/lib/metadata";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowRight, Check, CheckCircle2 } from "lucide-react";
 import { notFound } from "next/navigation";
@@ -13,6 +15,8 @@ import { getLocale } from "@/i18n/server";
 
 type Props = { params: Promise<{ slug: string }> };
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return products.map(({ slug }) => ({ slug }));
 }
@@ -23,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!product) return {};
   const locale = await getLocale();
   const content = localizeProduct(product, locale);
-  return {
+  return createPageMetadata(locale, {
     title: product.name,
     description: content.shortDescription,
     alternates: {
@@ -31,11 +35,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       languages: { id: `/products/${product.slug}`, en: `/en/products/${product.slug}` },
     },
     openGraph: {
-      title: `${product.name} — Sadani`,
+      title: `${product.name} — Sadatech`,
       description: content.shortDescription,
       url: localizePath(locale, `/products/${product.slug}`),
     },
-  };
+  });
 }
 
 export default async function ProductPage({ params }: Props) {
@@ -59,7 +63,7 @@ export default async function ProductPage({ params }: Props) {
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
             <div>
               <p className={`eyebrow text-${product.slug}`}>
-                {content.category} · {locale === "id" ? "Produk Sadani" : "A Sadani product"}
+                {content.category} · {product.kind === "product" ? (locale === "id" ? "Produk Sadatech" : "A Sadatech product") : (locale === "id" ? "Proyek Sadatech" : "A Sadatech project")}
               </p>
               <h1>{content.tagline}</h1>
               <p>{content.shortDescription}</p>
@@ -69,6 +73,7 @@ export default async function ProductPage({ params }: Props) {
                     {locale === "id" ? `Buka ${product.name}` : `Open ${product.name}`} <ArrowRight size={16} />
                   </ButtonLink>
                 )}
+                {!product.website && product.repository && <ButtonLink href={product.repository} target="_blank" rel="noopener noreferrer" variant="secondary">{locale === "id" ? "Lihat repository" : "View repository"}<ArrowRight size={16} /></ButtonLink>}
                 <ButtonLink href={localizePath(locale, "/contact")} variant={product.website ? "secondary" : "primary"}>
                   {locale === "id" ? `Bicara tentang ${product.name}` : `Talk to us about ${product.name}`} <ArrowRight size={16} />
                 </ButtonLink>
@@ -85,8 +90,9 @@ export default async function ProductPage({ params }: Props) {
             <div>
               <p className={`eyebrow text-${product.slug}`}>{dictionary.common.product}</p>
               <h2 className="section-title mt-4">
-                {locale === "id" ? "Dibangun di atas jalan ke depan yang lebih jelas." : "Built around a clearer way forward."}
+                {locale === "id" ? `Kenali ${product.name}.` : `Meet ${product.name}.`}
               </h2>
+              <div className="product-audience mt-7"><h3>{locale === "id" ? "Untuk siapa" : "Who it is for"}</h3><p>{content.audience}</p></div>
             </div>
             <div className="detail-copy">
               <p>{content.introduction}</p>
@@ -96,6 +102,9 @@ export default async function ProductPage({ params }: Props) {
               <p>{content.philosophy}</p>
             </div>
           </div>
+          <div className="product-benefits mt-12" aria-label={locale === "id" ? "Keunggulan" : "Benefits"}>
+            {content.benefits.map(benefit => <div key={benefit}><CheckCircle2 size={19} className={`text-${product.slug}`} aria-hidden="true" /><p>{benefit}</p></div>)}
+          </div>
         </Container>
       </section>
 
@@ -103,7 +112,7 @@ export default async function ProductPage({ params }: Props) {
         <Container>
           <p className={`eyebrow text-${product.slug}`}>{dictionary.common.corePreview}</p>
           <h2 className="section-title mt-4 max-w-2xl">
-            {locale === "id" ? "Fondasi yang terfokus untuk produk." : "A focused foundation for the product."}
+            {locale === "id" ? "Fitur yang dibangun untuk kebutuhan nyata." : "Features built around real needs."}
           </h2>
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {content.features.map((feature) => (
@@ -114,6 +123,7 @@ export default async function ProductPage({ params }: Props) {
               </article>
             ))}
           </div>
+          {product.gallery && <div className="product-gallery mt-10">{product.gallery.map(item => <figure key={item.src}><Image src={item.src} alt={locale === "id" ? item.titleId : item.title} width={1200} height={1000} unoptimized /><figcaption>{locale === "id" ? item.titleId : item.title}</figcaption></figure>)}</div>}
           <div className="status-panel mt-10">
             <span>{dictionary.common.status}</span>
             <p>{content.status}</p>

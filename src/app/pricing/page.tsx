@@ -1,3 +1,4 @@
+import { createPageMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 import { ArrowUpRight, Check } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
@@ -10,14 +11,14 @@ import { getLocale } from "@/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  return {
+  return createPageMetadata(locale, {
     title: locale === "id" ? "Harga" : "Pricing",
     description:
       locale === "id"
         ? "Harga membership Manifly dan status harga komersial Serahin. Semua harga publik dalam Rupiah."
         : "Manifly membership pricing and the status of Serahin commercial pricing. All public prices are in Indonesian Rupiah.",
     alternates: { canonical: localizePath(locale, "/pricing"), languages: { id: "/pricing", en: "/en/pricing" } },
-  };
+  });
 }
 
 export default async function PricingPage() {

@@ -5,7 +5,7 @@ import { ActionLink } from "../ui/action-link";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { localizePath, type Locale } from "@/i18n/config";
 
-/** Closing call to action with the aurora and "Sadani" wordmark. On the homepage it reveals on scroll. */
+/** Closing call to action with the aurora and "Sadatech" wordmark. On the homepage it reveals on scroll. */
 export function FinalCta({ locale, dictionary, home = false }: { locale: Locale; dictionary: Dictionary; home?: boolean }) {
   const title = home ? dictionary.home.buildTitle : dictionary.common.finalTitle;
   const copy = home ? dictionary.home.buildBody : dictionary.common.finalCopy;
@@ -24,7 +24,7 @@ export function FinalCta({ locale, dictionary, home = false }: { locale: Locale;
       <div className="cta__aurora">
         <Aurora wide />
         <p className={`cta__word ${home ? "" : "is-in"}`} data-wordmark={home || undefined} aria-hidden="true">
-          {"Sadani".split("").map((letter, i) => <span key={i}>{letter}</span>)}
+          {"Sadatech".split("").map((letter, i) => <span key={i}>{letter}</span>)}
         </p>
       </div>
     </section>

@@ -32,11 +32,11 @@ export function Header({ locale, dictionary }: { locale: Locale; dictionary: Dic
 
   useEffect(() => { setOpen(false); }, [pathname]);
 
-  // nav--intro: on the homepage the pill drops in with the hero intro (see sadani.css).
+  // nav--intro: on the homepage the pill drops in with the hero intro (see sadatech.css).
   return (
     <header className={`nav ${isHome ? "nav--intro" : ""} ${scrolled ? "is-scrolled" : ""} ${open ? "is-open" : ""}`}>
       <div className="nav__pill">
-        <Logo href={localizePath(locale, "/")} />
+        <Logo href={localizePath(locale, "/")} separated />
         <nav className="nav__links" id="nav-links" aria-label={locale === "id" ? "Navigasi utama" : "Primary navigation"}>
           {navigation.map((item, index) => {
             const active = item.href === "/" ? isHome : cleanPath.startsWith(item.href);

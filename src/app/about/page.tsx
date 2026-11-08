@@ -1,3 +1,4 @@
+import { createPageMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 import { ArrowUpRight, Gauge, Lightbulb, RefreshCcw, Shapes } from "lucide-react";
 import { FinalCta } from "@/components/sections/final-cta";
@@ -8,7 +9,7 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { localizePath } from "@/i18n/config";
 import { getLocale } from "@/i18n/server";
 
-export async function generateMetadata(): Promise<Metadata> { const locale = await getLocale(); return { title: locale === "id" ? "Tentang" : "About", description: locale === "id" ? "Sadani adalah perusahaan teknologi Indonesia yang mengubah ide berguna menjadi produk digital." : "Sadani is an Indonesian technology company turning useful ideas into digital products.", alternates: { canonical: localizePath(locale, "/about"), languages: { id: "/about", en: "/en/about" } } }; }
+export async function generateMetadata(): Promise<Metadata> { const locale = await getLocale(); return createPageMetadata(locale, { title: locale === "id" ? "Tentang" : "About", description: locale === "id" ? "Sadatech adalah perusahaan teknologi Indonesia yang mengubah ide berguna menjadi produk digital." : "Sadatech is an Indonesian technology company turning useful ideas into digital products.", alternates: { canonical: localizePath(locale, "/about"), languages: { id: "/about", en: "/en/about" } } }); }
 
 const values = [
   { icon: Lightbulb, title: "Build useful things", copy: "Technology should solve real problems instead of existing only for novelty." },
